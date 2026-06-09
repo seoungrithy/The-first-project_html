@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Sport - Running Shoes Store</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff5722;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRezSUE7uSFvOLr8JSyeelvNzrdFGrXyyOnTA&s') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 30px;
+            font-weight: 500;
+        }
+        .btn-primary:hover {
+            background-color: #e64a19;
+            border-color: #e64a19;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        /* Product Card */
+        .product-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .product-img {
+            height: 250px;
+            object-fit: contain;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .product-body {
+            padding: 20px;
+        }
+        .product-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        /* Features */
+        .feature-box {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        footer h5 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        footer a:hover {
+            color: var(--primary-color);
+        }
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-running"></i> K-sport</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Step Up Your Run With <span style="color:#ff5722">Premium Shoes</span></h1>
+            <p>Lightweight, comfortable, and designed for performance — perfect for training, marathons, or daily runs.</p>
+            <a href="#products" class="btn btn-primary btn-lg">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Our Best <span>Sellers</span></h2>
+            <div class="row">
+                <!-- Product 1 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQI49Mg4VX9zKry805sMNa-NF2zmHb2ku_gA&s" class="product-img card-img-top" alt="Running Shoe">
+                        <div class="card-body product-body">
+                            <h5 class="product-title">New balance</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="product-price">$129.99</div>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxETEhMTExMWFRUXFhcYGBcXGBgaGRcVFRgWGBgXGBgYHikhGh0lGxUVITEhJSkrLi4uFx8zODMuNygtLisBCgoKDg0OGhAQGy0lHSUtLS0vLS0rLS0rLy0tLSstLS0tKy0tLS0tLS0tLS0tLS0vLS4tLi0tLS8tLS0tLS0tLf/AABEIAMoA+QMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAABgIDBAUHAQj/xABJEAABAwICBQcHCAgGAgMAAAABAAIRAyEEMQUSQVFhBhMicYGRsQcyUqHB0fAUQmJygpLS4RUjM0NTorLCFhckY4Ozk/FEVHP/xAAYAQEBAQEBAAAAAAAAAAAAAAAAAQIDBP/EACsRAQEAAgEDAgQFBQAAAAAAAAABAhEDEjFRIUETYZGxFDJxofAEIlLR8f/aAAwDAQACEQMRAD8A7SvURUEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERARatnKLBmscOMRS54GOb1hrawzaN54C62iaBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQFyrykctq/PuwGFJYGt/XVWzryRPNsPzbWJF5sIi/U3vABJyAJPUF8xU8a/Wq1XDWfVqOO8lxMk2zvK78GEyu6zlWNi8AR51RlPc06zndrWA6v2oK7D5JuWPPUXYfE1muqUhLKhd+0pfSL4drNjNwuCDeCVxnGVQ29WoGn0WjWI67gDqCpxWBIaCLgxaIdfIau/K0r0Z4TOaY3ZX1ei4XyH8o9TA4fmq9OpXYILCHdOmDY0xrZtBFhIi+yAOocleWmFxxLGEsqhuvzTnMJLCY12Opuc14BBBgyDmAvHlhce7pLtJERFhRERAREQEREBERAREQEREBERARFpeWOPNHCVXAw5w1G9b7SOIGsexJNkbTG4plKm+rUOqym1z3Hc1gJce4FfPnKzyp4rFVCKNR+Hoz0WMOq8j0qjxeeAMDjmpZovH4hrC3nn6pBBaXEiCIIg5W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" class="product-img card-img-top" alt="Running Shoe">
+                        <div class="card-body product-body">
+                            <h5 class="product-title">HOKA</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="product-price">$99.99</div>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIzcU2t5r4_F-M4XTXD9e-M4w8e06ZwqfzgA&s" class="product-img card-img-top" alt="Running Shoe">
+                        <div class="card-body product-body">
+                            <h5 class="product-title">Adidas</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">$149.99</div>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9kBlI-ZF1-JY7p_wOgK-mqQaabGuV4zwVCg&s" class="product-img card-img-top" alt="Running Shoe">
+                        <div class="card-body product-body">
+                            <h5 class="product-title">Nike ACG Pegasus Trail</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">$169.99</div>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 5-->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTNicW0l3PbdO-JyOudvNmJYLb2_DP38p4kA&s" class="product-img card-img-top" alt="Running Shoe">
+                        <div class="card-body product-body">
+                            <h5 class="product-title">Asics</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-price">$168.99</div>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!--product 6-->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREPffMsaU3Ou1qmWf5mjfkZzrfYsoq7y1R0Q&s" class="product-img card-img-top" alt="Running Shoe">
+                        <div class="card-body product-body">
+                            <h5 class="product-title">ON Running</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="product-price">$89.99</div>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!--product 7-->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzyF8W9h54RHKdr1Yi6QCupAAfCj56EArqfQ&s" class="product-img card-img-top" alt="Running Shoe">
+                        <div class="card-body product-body">
+                            <h5 class="product-title">Adidas US</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="product-price">$129.99</div>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbOWj89mf2qR0ovYGqMlDJ7WrugwFqoji_Yg&s" class="product-img card-img-top" alt="Running Shoe">
+                        <div class="card-body product-body">
+                            <h5 class="product-title">QC</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="product-price">$69.99</div>
+                            <a href="#" class="btn btn-primary w-100">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Why Choose <span>k-sport</span></h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="feature-box">
+                        <i class="fas fa-wind feature-icon"></i>
+                        <h4>Lightweight</h4>
+                        <p>Designed with ultra-light materials for effortless running.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="feature-box">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h4>Durable</h4>
+                        <p>High-quality construction that lasts thousands of miles.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="feature-box">
+                        <i class="fas fa-heart feature-icon"></i>
+                        <h4>Comfort</h4>
+                        <p>Premium cushioning and perfect fit for all-day comfort.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="feature-box">
+                        <i class="fas fa-leaf feature-icon"></i>
+                        <h4>Breathable</h4>
+                        <p>Airflow technology keeps your feet cool and dry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>K-Sport</h5>
+                    <p>Your trusted destination for high-performance running shoes. We combine style, comfort, and technology to help you run your best.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Shop</h5>
+                    <a href="#">Men's Shoes</a>
+                    <a href="#">Women's Shoes</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Best Sellers</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Support</h5>
+                    <a href="#">Size Guide</a>
+                    <a href="#">Shipping Info</a>
+                    <a href="#">Returns Policy</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" id="contact">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Running St, Phnom Penh, Cambodia</p>
+                    <p><i class="fas fa-phone"></i> +855 977878628 \ 097 7665020 </p>
+                    <p><i class="fas fa-envelope"></i> info@k-Sport.com</p>
+                </div>
+            </div>
+            <div class="text-center pt-4 border-top border-secondary">
+                <p>&copy; 2026 K-Sport. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

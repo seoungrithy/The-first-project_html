@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunshine Coffee</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #fdf6ec;
+      --espresso: #2c1a0e;
+      --caramel: #c8860a;
+      --latte: #c4a882;
+      --foam: #f5ede0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--cream);
+      color: var(--espresso);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--espresso) !important;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--caramel) !important;
+      letter-spacing: 1px;
+    }
+    .nav-link {
+      color: var(--latte) !important;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--caramel) !important; }
+
+    /* HERO */
+    .hero {
+      height: 92vh;
+      background: linear-gradient(160deg, rgba(44,26,14,0.75) 0%, rgba(200,134,10,0.35) 90%),
+        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn6OMnQaZkp5fA_g4Zu0AJKs_xroXexwvy1w&s') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, var(--cream), transparent);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin: 16px 0 32px;
+    }
+    .btn-gold {
+      background: var(--caramel);
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      border-radius: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-gold:hover { background: #a96e08; color: white; transform: translateY(-2px); }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--espresso);
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--caramel);
+      margin: 10px auto 0;
+    }
+
+    /* ABOUT */
+    #about { background: var(--cream); }
+    #about p {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #5a3e28;
+    }
+
+    /* MENU TABS */
+    #menu { background: var(--foam); }
+    .menu-tabs .nav-link {
+      color: var(--espresso) !important;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: 0;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .menu-tabs .nav-link.active,
+    .menu-tabs .nav-link:hover {
+      color: var(--caramel) !important;
+      border-color: var(--caramel);
+      background: transparent;
+    }
+
+    /* MENU CARD */
+    .menu-card {
+      background: white;
+      border: none;
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(44,26,14,0.08);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(44,26,14,0.15);
+    }
+    .menu-card img {
+      height: 220px;
+      object-fit: cover;
+      width: 100%;
+    }
+    .menu-card .card-body { padding: 20px; }
+    .menu-card h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--espresso);
+    }
+    .menu-card p.desc {
+      font-size: 0.88rem;
+      color: #8a6a50;
+      line-height: 1.5;
+      margin: 6px 0 12px;
+    }
+    .menu-card .price {
+      font-weight: 700;
+      color: var(--caramel);
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+    .badge-hot {
+      background: #c0392b;
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .badge-new {
+      background: var(--caramel);
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* SPECIALS BANNER */
+    .specials-banner {
+      background: var(--espresso);
+      color:white;
+      padding: 60px 0;
+    }
+    .specials-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--caramel);
+    }
+    .specials-banner p { color: var(--latte); font-size: 1rem; }
+    .special-item {
+      border-left: 3px solid var(--caramel);
+      padding: 12px 0 12px 20px;
+    }
+    .special-item h6 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .special-item p { font-size: 0.85rem; color: var(--latte); margin: 0; }
+    .special-item .sp-price { color: var(--caramel); font-weight: 700; }
+
+    /* CONTACT */
+    #contact { background: var(--cream); }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      border: 1px solid #d9c5ae;
+      border-radius: 0;
+      background: white;
+      padding: 12px 16px;
+      font-family: 'Lato', sans-serif;
+      color: var(--espresso);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--caramel);
+      box-shadow: 0 0 0 3px rgba(200,134,10,0.15);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--espresso);
+      color: var(--latte);
+      padding: 40px 0 20px;
+    }
+    footer .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--caramel);
+    }
+    footer a { color: var(--latte); text-decoration: none; }
+    footer a:hover { color: var(--caramel); }
+    footer .divider { border-color: rgba(255,255,255,0.1); }
+
+    /* HOURS */
+    .hours-table td { padding: 6px 16px 6px 0; font-size: 0.9rem; }
+    .hours-table td:last-child { color: var(--caramel); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">☕ Sunshice Coffee</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#specials">Specials</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="container position-relative" style="z-index:1">
+    <h1>Wellcome<br> to Sunshine Coffee</h1>
+    <p>Premium Coffee · Artisan Pastries · Good Vibes</p>
+    <a href="#menu" class="btn btn-gold btn-lg">Explore Our Menu</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-5">
+  <div class="container text-center py-4">
+    <p class="section-title mb-4">About Us</p>
+    <p>
+      Sunshine Coffee is a modern specialty café dedicated to sourcing the world's finest beans
+      and crafting each cup with passion and precision. From our hand-pulled espressos to our
+      house-made pastries, every detail is made to make your day a little brighter.
+    ​  <p>
+      Sunshine គឺជាហាងកាហ្វេពិសេសទំនើបមួយដែលការស្វែងរកគ្រាប់កាហ្វេល្អបំផុតរបស់ពិភពលោក 
+      និងផលិតពែងកាហ្វេនីមួយៗដោយចំណង់ចំណូលចិត្ត និងភាពជាក់លាក់។ ចាប់ពីកាហ្វេអេសប្រេសសូដែលទាញដោយដៃរបស់យើង
+      រហូតដល់នំធ្វើនៅផ្ទះរបស់យើង រាល់ព័ត៌មានលម្អិតត្រូវបានធ្វើឡើងដើម្បីធ្វើឱ្យថ្ងៃរបស់អ្នកកាន់តែភ្លឺស្វាង។
+      Sunshine coffee គឺជាកាហ្វេឆ្ងាញ់រហូតដល់ដំណក់ចុងក្រោយ​។
+      </p>
+    </p>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-title">Our Menu</p>
+      <p class="text-muted mt-3" style="font-size:0.95rem">Crafted with love, served with care</p>
+    </div>
+
+    <!-- TABS -->
+    <ul class="nav menu-tabs justify-content-center flex-wrap gap-2 background" id="menuTab" role="tablist">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#hot-coffee">Hot Coffee</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#cold-coffee">Cold Drinks</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#non-coffee">Non-Coffee</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#pastries">Pastries</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#breakfast">Breakfast</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#desserts">Desserts</button></li>
+    </ul>
+
+    <div class="tab-content">
+
+      <!-- HOT COFFEE -->
+      <div class="tab-pane fade show active" id="hot-coffee">
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?q=80&w=800&auto=format&fit=crop" alt="Espresso">
+              <div class="card-body">
+                <h5>Espresso <span class="badge-hot">Hot</span></h5>
+                <p class="desc">Rich, concentrated shot with a velvety crema layer. Bold and intense.</p>
+                <div class="price">$3.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop" alt="Cappuccino">
+              <div class="card-body">
+                <h5>Cappuccino</h5>
+                <p class="desc">Equal parts espresso, steamed milk, and thick velvety foam. A classic.</p>
+                <div class="price">$4.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop" alt="Latte">
+              <div class="card-body">
+                <h5>Latte</h5>
+                <p class="desc">Smooth espresso with silky steamed milk and a thin layer of foam.</p>
+                <div class="price">$4.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=800&auto=format&fit=crop" alt="Flat White">
+              <div class="card-body">
+                <h5>Flat White <span class="badge-new">New</span></h5>
+                <p class="desc">Ristretto shots with microfoam milk — stronger than a latte, creamier than a cap.</p>
+                <div class="price">$4.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://torque.coffee/cdn/shop/articles/nice-Iced-Americano-008s.jpg?v=1772827175" alt="Americano">
+              <div class="card-body">
+                <h5>Americano</h5>
+                <p class="desc">Espresso diluted with hot water for a smooth, full-bodied black coffee.</p>
+                <div class="price">$3.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQl4oliMpfVSnuYJtD3DRLQ6n-WJMoW_iIJQ&s" alt="Macchiato">
+              <div class="card-body">
+                <h5>Caramel Macchiato</h5>
+                <p class="desc">Vanilla-sweetened milk with espresso and a drizzle of caramel sauce.</p>
+                <div class="price">$5.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=800&auto=format&fit=crop" alt="Mocha">
+              <div class="card-body">
+                <h5>Mocha</h5>
+                <p class="desc">Espresso with rich chocolate sauce, steamed milk, and whipped cream.</p>
+                <div class="price">$5.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop" alt="Cortado">
+              <div class="card-body">
+                <h5>Cortado</h5>
+                <p class="desc">A balanced shot of espresso cut with a small amount of warm milk.</p>
+                <div class="price">$4.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ00rsHEWY39w85wjkZr8au2f9bYMFQ7hXiEQ&s" alt="Dirty Chai">
+              <div class="card-body">
+                <h5>Dirty Chai Latte <span class="badge-hot">Popular</span></h5>
+                <p class="desc">Spiced chai tea blended with a shot of espresso and steamed milk.</p>
+                <div class="price">$5.50</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLD DRINKS -->
+      <div class="tab-pane fade" id="cold-coffee">
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=800&auto=format&fit=crop" alt="Iced Latte">
+              <div class="card-body">
+                <h5>Iced Latte <span class="badge-hot">Best Seller</span></h5>
+                <p class="desc">Chilled espresso poured over ice with cold milk. Refreshing and smooth.</p>
+                <div class="price">$5.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=800&auto=format&fit=crop" alt="Cold Brew">
+              <div class="card-body">
+                <h5>Cold Brew</h5>
+                <p class="desc">Steeped 18 hours for a smooth, mellow, and naturally sweet iced coffee.</p>
+                <div class="price">$5.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop" alt="Frappuccino">
+              <div class="card-body">
+                <h5>Blended Frappe</h5>
+                <p class="desc">Blended ice, espresso, and milk — creamy, cold, and delicious.</p>
+                <div class="price">$6.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=800&auto=format&fit=crop" alt="Iced Americano">
+              <div class="card-body">
+                <h5>Iced Americano</h5>
+                <p class="desc">Espresso shots over ice, topped with cold water. Bold and clean.</p>
+                <div class="price">$4.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?q=80&w=800&auto=format&fit=crop" alt="Dalgona">
+              <div class="card-body">
+                <h5>Dalgona Coffee <span class="badge-new">New</span></h5>
+                <p class="desc">Whipped coffee foam over chilled milk — pillowy, sweet, and indulgent.</p>
+                <div class="price">$5.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?q=80&w=800&auto=format&fit=crop" alt="Tonic Espresso">
+              <div class="card-body">
+                <h5>Espresso Tonic</h5>
+                <p class="desc">Crisp tonic water with a float of espresso. Bright, bitter, and refreshing.</p>
+                <div class="price">$5.50</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NON-COFFEE -->
+      <div class="tab-pane fade" id="non-coffee">
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=800&auto=format&fit=crop" alt="Matcha Latte">
+              <div class="card-body">
+                <h5>Matcha Latte <span class="badge-hot">Popular</span></h5>
+                <p class="desc">Ceremonial-grade matcha whisked with steamed oat or dairy milk.</p>
+                <div class="price">$5.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=800&auto=format&fit=crop" alt="Chai Latte">
+              <div class="card-body">
+                <h5>Chai Latte</h5>
+                <p class="desc">House-blend spiced tea with cinnamon, cardamom, ginger, and steamed milk.</p>
+                <div class="price">$4.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1575037614876-c38a4d44f5b8?q=80&w=800&auto=format&fit=crop" alt="Hot Chocolate">
+              <div class="card-body">
+                <h5>Artisan Hot Chocolate</h5>
+                <p class="desc">Rich Belgian chocolate melted into warm milk with a pinch of sea salt.</p>
+                <div class="price">$4.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="data:image/jpeg;base64,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" alt="Turmeric Latte">
+              <div class="card-body">
+                <h5>Golden Turmeric Latte <span class="badge-new">New</span></h5>
+                <p class="desc">Warming turmeric, ginger, and cinnamon blended with creamy milk.</p>
+                <div class="price">$5.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?q=80&w=800&auto=format&fit=crop" alt="Fresh Juice">
+              <div class="card-body">
+                <h5>Fresh Pressed Juice</h5>
+                <p class="desc">Daily-rotating seasonal fruits. Orange, watermelon, or green detox.</p>
+                <div class="price">$4.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?q=80&w=800&auto=format&fit=crop" alt="Lemonade">
+              <div class="card-body">
+                <h5>Lavender Lemonade</h5>
+                <p class="desc">House-made lemonade infused with floral lavender syrup and fresh mint.</p>
+                <div class="price">$4.50</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASTRIES -->
+      <div class="tab-pane fade" id="pastries">
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800&auto=format&fit=crop" alt="Croissant">
+              <div class="card-body">
+                <h5>Butter Croissant <span class="badge-hot">Daily Fresh</span></h5>
+                <p class="desc">Flaky, laminated pastry baked golden every morning. Perfectly buttery.</p>
+                <div class="price">$3.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop" alt="Cinnamon Roll">
+              <div class="card-body">
+                <h5>Cinnamon Roll</h5>
+                <p class="desc">Warm, pillowy roll with brown sugar cinnamon filling and cream cheese glaze.</p>
+                <div class="price">$4.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800&auto=format&fit=crop" alt="Muffin">
+              <div class="card-body">
+                <h5>Blueberry Muffin</h5>
+                <p class="desc">Moist, fluffy muffin bursting with fresh blueberries and a crunchy top.</p>
+                <div class="price">$3.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop" alt="Banana Bread">
+              <div class="card-body">
+                <h5>Banana Walnut Bread</h5>
+                <p class="desc">Dense, moist loaf loaded with ripe bananas and toasted walnuts.</p>
+                <div class="price">$3.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?q=80&w=800&auto=format&fit=crop" alt="Scone">
+              <div class="card-body">
+                <h5>Earl Grey Scone <span class="badge-new">New</span></h5>
+                <p class="desc">Delicate scone infused with Earl Grey tea and a vanilla-lemon glaze.</p>
+                <div class="price">$3.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjWUqPMuoWXiZ9JjU4hlpUfIrpdl2bgjyBeg&s" alt="Eclair">
+              <div class="card-body">
+                <h5>Chocolate Éclair</h5>
+                <p class="desc">Choux pastry filled with vanilla cream and topped with dark chocolate ganache.</p>
+                <div class="price">$4.50</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BREAKFAST -->
+      <div class="tab-pane fade" id="breakfast">
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=800&auto=format&fit=crop" alt="Avocado Toast">
+              <div class="card-body">
+                <h5>Avocado Toast <span class="badge-hot">Popular</span></h5>
+                <p class="desc">Sourdough toast with smashed avocado, poached egg, chili flakes & microgreens.</p>
+                <div class="price">$9.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop" alt="Acai Bowl">
+              <div class="card-body">
+                <h5>Açaí Power Bowl</h5>
+                <p class="desc">Blended açaí with granola, fresh berries, honey, and coconut flakes.</p>
+                <div class="price">$10.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?q=80&w=800&auto=format&fit=crop" alt="Pancakes">
+              <div class="card-body">
+                <h5>Fluffy Pancake Stack</h5>
+                <p class="desc">Three buttermilk pancakes served with maple syrup and seasonal berries.</p>
+                <div class="price">$10.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1494390248081-4e521a5940db?q=80&w=800&auto=format&fit=crop" alt="Granola">
+              <div class="card-body">
+                <h5>House Granola Bowl</h5>
+                <p class="desc">Toasted house granola, Greek yogurt, seasonal fruit and local honey.</p>
+                <div class="price">$8.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=800&auto=format&fit=crop" alt="Egg Sandwich">
+              <div class="card-body">
+                <h5>Breakfast Sandwich <span class="badge-new">New</span></h5>
+                <p class="desc">Brioche bun with scrambled eggs, aged cheddar, turkey bacon & aioli.</p>
+                <div class="price">$9.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=800&auto=format&fit=crop" alt="French Toast">
+              <div class="card-body">
+                <h5>Brioche French Toast</h5>
+                <p class="desc">Thick-cut brioche soaked in vanilla custard, served with caramelized banana.</p>
+                <div class="price">$11.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESSERTS -->
+      <div class="tab-pane fade" id="desserts">
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=800&auto=format&fit=crop" alt="Tiramisu">
+              <div class="card-body">
+                <h5>Classic Tiramisu <span class="badge-hot">Signature</span></h5>
+                <p class="desc">House-made espresso-soaked ladyfingers with mascarpone cream and cocoa.</p>
+                <div class="price">$7.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800&auto=format&fit=crop" alt="Cheesecake">
+              <div class="card-body">
+                <h5>New York Cheesecake</h5>
+                <p class="desc">Dense, creamy cheesecake on a graham cracker crust with berry coulis.</p>
+                <div class="price">$7.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1574085733277-851d9d856a3a?q=80&w=800&auto=format&fit=crop" alt="Brownie">
+              <div class="card-body">
+                <h5>Fudge Brownie</h5>
+                <p class="desc">Dark chocolate brownie with a gooey center, served warm with vanilla ice cream.</p>
+                <div class="price">$6.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop" alt="Cookies">
+              <div class="card-body">
+                <h5>Chocolate Chip Cookies</h5>
+                <p class="desc">Baked fresh daily — crispy edges, chewy centers, loaded with chocolate.</p>
+                <div class="price">$2.50</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=800&auto=format&fit=crop" alt="Cake Slice">
+              <div class="card-body">
+                <h5>Seasonal Layer Cake <span class="badge-new">Rotating</span></h5>
+                <p class="desc">Our chef's rotating seasonal creation — ask your barista for today's flavor.</p>
+                <div class="price">$8.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="menu-card card h-100">
+              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=800&auto=format&fit=crop" alt="Macaron">
+              <div class="card-body">
+                <h5>French Macarons (3pc)</h5>
+                <p class="desc">Delicate almond shells with ganache fillings — pistachio, rose & salted caramel.</p>
+                <div class="price">$6.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-content -->
+  </div>
+</section>
+
+<!-- DAILY SPECIALS -->
+<section id="specials" class="specials-banner">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-4">
+        <h2 class="mb-3">Daily Specials</h2>
+        <p>Fresh combinations crafted by our baristas every day of the week. Come in and treat yourself.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="row g-4">
+          <div class="col-sm-6">
+            <div class="special-item">
+              <h6>Monday – Oat Milk Latte + Scone</h6>
+              <p>Smooth oat latte with an Earl Grey scone <span class="sp-price">$2.50</span></p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="special-item">
+              <h6>Tuesday – Cold Brew + Muffin</h6>
+              <p>18-hr cold brew with a blueberry muffin <span class="sp-price">$3.00</span></p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="special-item">
+              <h6>Wednesday – Matcha + Banana Bread</h6>
+              <p>Ceremonial matcha with warm banana loaf <span class="sp-price">$3.50</span></p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="special-item">
+              <h6>Thursday – Dirty Chai + Croissant</h6>
+              <p>Spiced chai latte with a butter croissant <span class="sp-price">$3.50</span></p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="special-item">
+              <h6>Friday – Espresso Tonic + Éclair</h6>
+              <p>Bright tonic espresso with a chocolate éclair <span class="sp-price">$5.00</span></p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="special-item">
+              <h6>Weekend – Brunch Set</h6>
+              <p>Any coffee + any breakfast plate <span class="sp-price">$13.50</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-5">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <p class="section-title">Contact Us</p>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <h5 style="font-family:'Playfair Display',serif; color:var(--espresso); font-size:1.3rem; margin-bottom:20px">Find Us</h5>
+        <p style="color:#6b4c36; line-height:1.8;">
+          📍 kompong chhnang province <br>
+          📞 +1 (855) 0977878628<br>
+          ✉️ hello@sunshinecoffee.com
+        </p>
+        <table class="hours-table mt-4">
+          <tr><td>Mon – Fri</td><td>7:00 AM – 9:00 PM</td></tr>
+          <tr><td>Saturday</td><td>8:00 AM – 10:00 PM</td></tr>
+          <tr><td>Sunday</td><td>9:00 AM – 8:00 PM</td></tr>
+        </table>
+      </div>
+      <div class="col-lg-7">
+        <div class="contact-form">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Your Name">
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Your Email">
+          </div>
+          <div class="mb-3">
+            <select class="form-control">
+              <option>General Inquiry</option>
+              <option>Reservation</option>
+              <option>Catering</option>
+              <option>Feedback</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+          </div>
+          <button class="btn btn-gold w-100">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row gy-4 pb-4">
+      <div class="col-md-4">
+        <div class="brand mb-2">☕ Sunshine Coffee</div>
+        <p style="font-size:0.88rem; color:var(--latte); line-height:1.7;">
+          Premium coffee, artisan pastries, and good vibes since 2020. Come for the coffee, stay for the atmosphere.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h6 style="color:var(--caramel); letter-spacing:2px; text-transform:uppercase; font-size:0.8rem; margin-bottom:14px;">Quick Links</h6>
+        <ul style="list-style:none; padding:0; line-height:2.2; font-size:0.9rem;">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#specials">Daily Specials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h6 style="color:var(--caramel); letter-spacing:2px; text-transform:uppercase; font-size:0.8rem; margin-bottom:14px;">Hours</h6>
+        <table class="hours-table" style="font-size:0.88rem;">
+          <tr><td>Mon – Fri</td><td>7AM – 9PM</td></tr>
+          <tr><td>Saturday</td><td>8AM – 10PM</td></tr>
+          <tr><td>Sunday</td><td>9AM – 8PM</td></tr>
+        </table>
+      </div>
+    </div>
+    <hr class="divider">
+    <p class="text-center pt-3" style="font-size:0.82rem; color:#7a6252; margin:0;">© 2026 Sunshice Coffee. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
